@@ -15,10 +15,55 @@
 body {
   margin: 0;
   font-family: var(--font-base);
-  background-color: var(--color-light);
-  background-image: url('../images/background.jpg');
-  background-repeat: repeat;
+  /* background-color: var(--color-light); */ /* Убрал, т.к. фон теперь будет картинками */
+  /* background-image: url('../images/background.jpg'); */ /* Убрал старый фон */
+  background-repeat: repeat; /* Этот стиль может быть не нужен, т.к. фон будет cover */
   color: #333;
+  overflow-x: hidden; /* Предотвращаем горизонтальный скролл при transform-эффектах */
+}
+
+/* Контейнер для всего приложения, чтобы фон был под ним */
+.app-container {
+  position: relative;
+  min-height: 100vh; /* Минимальная высота, чтобы фон занимал весь экран */
+  z-index: 1; /* Чтобы контент был поверх фона */
+  display: flex;
+  flex-direction: column;
+}
+
+/* НОВЫЕ СТИЛИ ДЛЯ ФОНОВОГО СЛАЙДЕРА */
+.background-slider {
+  position: fixed; /* Фиксируем фон */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Фон должен быть за основным контентом */
+  overflow: hidden; /* Важно для обрезки изображений при эффектах */
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* Изображение будет покрывать весь фон */
+  background-position: center; /* Центрируем изображение */
+  opacity: 0; /* Изначально все изображения скрыты */
+  transition: opacity 1.5s ease-in-out, transform 10s linear; /* Плавный переход и медленный зум/движение */
+  transform: scale(1); /* Начальное состояние для эффекта */
+}
+
+.background-image.active {
+  opacity: 1; /* Активное изображение видно */
+  transform: scale(1.1); /* Небольшой зум-эффект для активного изображения */
+}
+
+/* Чтобы контент был над фоном */
+.navbar, .home-container, .places-container, .admin-panel {
+    position: relative; /* Делаем элементы относительными, чтобы z-index работал */
+    z-index: 10; /* Размещаем их над фоном */
 }
 
 /* Центрируем контент */
@@ -28,6 +73,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  width: 100%; /* Убедимся, что занимает всю доступную ширину */
 }
 
 h1, h2, h3, h4 {
@@ -38,7 +84,7 @@ h1, h2, h3, h4 {
 
 /* Навбар */
 .navbar {
-  position: relative;
+  position: relative; /* Переопределяем на relative, чтобы z-index работал с app-container */
   z-index: 1000;
   background-color: var(--color-red);
   padding: 1rem 2rem;
@@ -91,6 +137,8 @@ h1, h2, h3, h4 {
   );
   color: white;
   animation: fadeInUp 0.8s ease both;
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедимся, что поверх фона */
 }
 
 .hero h2 {
@@ -124,7 +172,8 @@ h1, h2, h3, h4 {
   border-radius: 8px;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  animation: fadeInUp 0.8s ease both;
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедимся, что поверх фона */
 }
 
 .section-block-left {
@@ -159,7 +208,9 @@ h1, h2, h3, h4 {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   margin-bottom: 2rem;
-  animation: fadeInUp 0.8s ease both;
+  animation: fadeInUp 0.8s ease both; /* Сохранил для PlaceCard, т.к. это другой компонент */
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедимся, что поверх фона */
 }
 
 .place-card h3 {
@@ -219,6 +270,8 @@ button:hover, .btn:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   max-width: 600px;
   margin: 0 auto;
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедимся, что поверх фона */
 }
 .admin-panel label {
   display: block;
@@ -235,11 +288,111 @@ button:hover, .btn:hover {
   font-family: var(--font-base);
 }
 
-/* Анимация появления */
+/* НОВАЯ СЕКЦИЯ: Почему стоит посетить */
+.why-visit {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold) 0%,
+    var(--color-orange) 100%
+  );
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедимся, что поверх фона */
+}
+
+.why-visit h2 {
+  color: white; /* Изменяем цвет заголовка для контраста */
+  margin-bottom: 2rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.reason-card {
+  background: rgba(255,255,255,0.98);
+  color: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reason-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.reason-card h4 {
+  color: var(--color-orange); /* Цвет заголовка карточки */
+  margin-bottom: 0.5rem;
+}
+.reason-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* НОВАЯ СЕКЦИЯ: Культурное видео */
+.culture-video {
+  background: rgba(255,255,255,0.95);
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедимся, что поверх фона */
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 800px; /* Ограничиваем ширину видео */
+  margin: 1.5rem auto 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cultural-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px; /* Добавляем скругление для видео */
+}
+
+/* АНИМАЦИИ */
+/* Анимация появления для Hero */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Fade-in on scroll effect */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* === АДАПТИВ === */
 @media (max-width: 1024px) {
@@ -257,6 +410,12 @@ button:hover, .btn:hover {
   }
   .hero p {
     padding: 0 1rem;
+  }
+  .why-visit {
+    padding: 2rem 1rem;
+  }
+  .card-grid {
+    grid-template-columns: 1fr; /* В одну колонку на маленьких экранах */
   }
 }
 
@@ -287,7 +446,8 @@ button:hover, .btn:hover {
     padding: 2rem 1rem;
   }
   .section-block,
-  .place-card {
+  .place-card,
+  .culture-video {
     padding: 1.5rem;
   }
   .media-preview {
