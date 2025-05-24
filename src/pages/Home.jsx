@@ -1,31 +1,33 @@
-import React, { useEffect } from 'react'; // Добавил useEffect
-import heroImg       from '../images/nation.jpg';
-import historyImg    from '../images/history.jpg';
-import languageImg   from '../images/language.jpg';
+import React, { useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
+// Импорты изображений
+import heroImg from '../images/nation.jpg';
+import historyImg from '../images/history.jpg';
+import languageImg from '../images/language.jpg';
 import traditionsImg from '../images/traditions.jpg';
-import craftsImg     from '../images/crafts.jpg';
-import cuisineImg    from '../images/cuisine.jpg';
-// import nature1       from '../images/nature1.jpg'; // Убрал импорты для галереи природы
-// import nature2       from '../images/nature2.jpg';
-// import nature3       from '../images/nature3.jpg';
-// import nature4       from '../images/nature4.jpg';
-import videoCulture  from '../images/culture_video.mp4'; // Пример видео
+import craftsImg from '../images/crafts.jpg';
+import cuisineImg from '../images/cuisine.jpg';
+import videoCulture from '../images/culture_video.mp4';
 
 export default function Home() {
+  // Эффект для плавного появления элементов при скролле
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('appear');
-          } else {
-            // Опционально: можно убрать класс 'appear', чтобы элементы исчезали при прокрутке вверх
-            // entry.target.classList.remove('appear');
           }
+          // Опционально: можно убрать класс 'appear', чтобы элементы исчезали при прокрутке вверх
+          // else {
+          //   entry.target.classList.remove('appear');
+          // }
         });
       },
       {
-        threshold: 0.1, // Элемент будет появляться, когда 10% его видимой части будет на экране
+        threshold: 0.15, // Элемент будет появляться, когда 15% его видимой части будет на экране
       }
     );
 
@@ -37,7 +39,7 @@ export default function Home() {
     return () => {
       fadeElements.forEach((el) => observer.unobserve(el));
     };
-  }, []); // Пустой массив зависимостей означает, что эффект запустится один раз при монтировании
+  }, []);
 
   return (
     <div className="home-container">
@@ -46,7 +48,7 @@ export default function Home() {
       <section className="hero">
         <h2>Добро пожаловать в Каракалпакстан</h2>
         <p>
-          Каракалпаки — древний народ с богатой историей, уникальными традициями и самобытной культурой. 
+          Каракалпаки — древний народ с богатой историей, уникальными традициями и самобытной культурой.
           Приглашаем вас открыть для себя удивительные уголки их родины!
         </p>
         <img src={heroImg} alt="Народ каракалпаков" />
@@ -57,8 +59,8 @@ export default function Home() {
         <div className="text">
           <h3>История каракалпаков</h3>
           <p>
-            Происхождение каракалпаков уходит в отдалённую древность. Первые упоминания встречаются в хрониках VIII–IX вв. н. э. 
-            Они тысячелетиями кочевали между Аралом и пустыней Кызылкум, развивая торговлю и ремёсла.
+            Происхождение каракалпаков уходит в отдалённую древность. Первые упоминания встречаются в хрониках VIII–IX вв. н. э.
+            Они тысячелетиями кочевали между Аралом и пустыней Кызылкум, развивая торговлю и ремёсла. Узнайте о древних цивилизациях и кочевых империях, оставивших свой след на этой земле.
           </p>
         </div>
         <div className="media">
@@ -75,8 +77,8 @@ export default function Home() {
           <h3>Язык и литература</h3>
           <p>
             Каракалпакский язык относится к кипчакской группе тюркских языков.
-            Местные фольклорные эпосы, поэтические сборники и легенды передаются устно
-            из поколения в поколение, сохраняя чувство единства народа.
+            Местные фольклорные эпосы, поэтические сборники и легенды, такие как «Алпамыс», передаются устно
+            из поколения в поколение, сохраняя чувство единства народа и его уникальную идентичность.
           </p>
         </div>
       </section>
@@ -87,15 +89,13 @@ export default function Home() {
           <h3>Традиции и обряды</h3>
           <p>
             Обряды весеннего праздника «Навруз», культ гостеприимства «чашки чая» и старинные свадебные ритуалы —
-            все они пропитаны глубокой символикой и мелодиями народных песен.
+            все они пропитаны глубокой символикой и мелодиями народных песен. Станьте свидетелем этих уникальных церемоний.
           </p>
         </div>
         <div className="media">
           <img src={traditionsImg} alt="Танцы на празднике Навруз" />
         </div>
       </section>
-
-      {/* УДАЛЕНА СЕКЦИЯ: Галерея Природы */}
 
       {/* 4. Ремёсла и искусство */}
       <section className="section-block section-block-right fade-in">
@@ -106,7 +106,7 @@ export default function Home() {
           <h3>Ремёсла и искусство</h3>
           <p>
             Каракалпакские ковры и ткани славятся сложными геометрическими узорами.
-            Мастера создают одеяла, пояса и вышивки, используя технику, проверенную веками.
+            Мастера создают одеяла, пояса и вышивки, используя технику, проверенную веками. Их произведения – это настоящее воплощение народной души.
           </p>
         </div>
       </section>
@@ -117,7 +117,7 @@ export default function Home() {
           <h3>Кулинария</h3>
           <p>
             Традиционные блюда — плов с тыквой, бешбармак, самса и лепёшки на топленом масле.
-            Местные специи придают жареному рису и мясу неповторимый аромат и уют семейного очага.
+            Местные специи придают жареному рису и мясу неповторимый аромат и уют семейного очага. Обязательно попробуйте!
           </p>
         </div>
         <div className="media">
@@ -125,27 +125,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* НОВАЯ СЕКЦИЯ: Почему стоит посетить */}
+      {/* НОВАЯ СЕКЦИЯ: Почему стоит посетить - теперь со свайпом */}
       <section className="why-visit fade-in">
         <h2>Почему стоит посетить Каракалпакстан?</h2>
-        <div className="card-grid">
-          <div className="reason-card">
-            <h4>Богатая история</h4>
-            <p>Древние памятники, крепости и уникальные археологические находки ждут вас.</p>
-          </div>
-          <div className="reason-card">
-            <h4>Самобытная культура</h4>
-            <p>Погрузитесь в мир народных песен, танцев, ремёсел и традиций.</p>
-          </div>
-          <div className="reason-card">
-            <h4>Уникальная природа</h4>
-            <p>От бескрайних пустынь до остатков Аральского моря – пейзажи, которые не оставят равнодушными.</p>
-          </div>
-          <div className="reason-card">
-            <h4>Теплое гостеприимство</h4>
-            <p>Местные жители встретят вас с открытым сердцем и поделятся своей культурой.</p>
-          </div>
-        </div>
+        <Swiper
+          modules={[Autoplay, Pagination, Navigation]}
+          spaceBetween={30}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 4000, // Автоматическое переключение каждые 4 секунды
+            disableOnInteraction: false, // Не останавливать при взаимодействии пользователя
+          }}
+          pagination={{ clickable: true }} // Точки для навигации
+          navigation={true} // Стрелки навигации
+          breakpoints={{
+            // Когда ширина окна >= 768px
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            // Когда ширина окна >= 1024px
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <div className="reason-card">
+              <h4>Богатая история и наследие</h4>
+              <p>Исследуйте древние памятники, крепости и уникальные археологические находки, свидетельствующие о многовековой истории региона. Откройте для себя загадки прошлых цивилизаций.</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="reason-card">
+              <h4>Самобытная культура и традиции</h4>
+              <p>Погрузитесь в мир народных песен, танцев, ремёсел и уникальных традиций каракалпакского народа. Участвуйте в праздниках и обрядах, которые сохранили свою аутентичность.</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="reason-card">
+              <h4>Уникальная природа и пейзажи</h4>
+              <p>От бескрайних пустынь до остатков Аральского моря и живописных озёр – Каракалпакстан предлагает пейзажи, которые не оставят равнодушными. Исследуйте уникальную флору и фауну.</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="reason-card">
+              <h4>Теплое гостеприимство</h4>
+              <p>Местные жители известны своим радушием. Они встретят вас с открытым сердцем, поделятся своей культурой, историями и угостят традиционными блюдами, создавая незабываемые впечатления.</p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="reason-card">
+              <h4>Аутентичные ремёсла</h4>
+              <p>Познакомьтесь с мастерами, создающими уникальные ковры, вышивки и изделия из дерева и металла. Приобретите сувениры ручной работы, которые станут настоящим напоминанием о вашем путешествии.</p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </section>
 
       {/* НОВАЯ СЕКЦИЯ: Познакомьтесь с культурой (Видео) */}
@@ -153,7 +191,7 @@ export default function Home() {
         <h2>Познакомьтесь с культурой</h2>
         <p>Посмотрите, как живет и празднует народ Каракалпакстана.</p>
         <div className="video-wrapper">
-          <video controls autoPlay muted loop src={videoCulture} className="cultural-video"></video>
+          <video controls autoPlay muted loop src={videoCulture} className="cultural-video" playsInline></video>
         </div>
       </section>
 
