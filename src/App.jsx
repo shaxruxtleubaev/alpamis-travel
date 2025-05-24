@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Places from './pages/Places';
-import Admin from './pages/Admin';
+import Contacts from './pages/Contacts'; // <-- НОВЫЙ ИМПОРТ
+
+// Импорты глобальных стилей и утилит
+import './static/css/global.css';
+import './static/css/utilities.css';
 
 // Импорт изображений для фонового слайдера
 import back1 from './images/back1.jpg';
@@ -20,7 +24,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBgIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-    }, 10000); // Меняем изображение каждые 10 секунд (10000 мс)
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -28,7 +32,6 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        {/* Фоновый слайдер */}
         <div className="background-slider">
           {backgroundImages.map((image, index) => (
             <div
@@ -43,7 +46,7 @@ function App() {
         <Routes>
           <Route path="/"       element={<Home />} />
           <Route path="/places" element={<Places />} />
-          <Route path="/admin"  element={<Admin />} />
+          <Route path="/contacts" element={<Contacts />} /> {/* <-- НОВЫЙ ROUTE */}
         </Routes>
       </div>
     </Router>

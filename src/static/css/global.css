@@ -1,0 +1,101 @@
+/* Импорты CSS для Swiper */
+@import 'swiper/css';
+@import 'swiper/css/autoplay';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+
+:root {
+  --color-light:       #FFF3B0;
+  --color-gold:        #FFCA3A;
+  --color-orange:      #FF7F11;
+  --color-red:         #EF233C;
+
+  --font-base:    'Comfortaa', sans-serif;
+  --font-heading: 'Roboto Slab', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Контейнер для всего приложения, чтобы фон был под ним */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* СТИЛИ ДЛЯ ФОНОВОГО СЛАЙДЕРА */
+.background-slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 10s linear;
+  transform: scale(1);
+}
+
+.background-image.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Чтобы контент был над фоном */
+.navbar, .home-container, .places-container { /* <-- ИЗМЕНЕНО */
+    position: relative;
+    z-index: 10;
+}
+
+/* Центрируем контент */
+.home-container,
+.places-container { /* <-- ИЗМЕНЕНО */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  margin-top: 0;
+}
+
+/* Кнопки (если они глобальные) */
+button, .btn {
+  font-family: var(--font-heading);
+  background-color: var(--color-red);
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform .2s, background-color .2s;
+  color: white;
+}
+button:hover, .btn:hover {
+  transform: scale(1.05);
+  background-color: var(--color-orange);
+}

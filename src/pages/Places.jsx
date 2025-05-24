@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PlaceCard from '../components/PlaceCard';
+import '../static/css/pages/Places.css'; // <-- ОБНОВЛЕННЫЙ ПУТЬ
 
 import pic1 from '../images/pic1.png';
 import pic2 from '../images/pic2.png';
@@ -8,10 +9,9 @@ import pic4 from '../images/pic4.png';
 
 export default function Places() {
   const [places, setPlaces] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null); // Состояние для открытого изображения
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    // Временно хардкодим данные для одного места
     setPlaces([
       {
         id: 1,
@@ -30,18 +30,17 @@ export default function Places() {
           { url: pic4, type: 'image' },
         ],
       },
-      // Добавлять другие места здесь пока не будем, как вы просили
     ]);
   }, []);
 
   const openLightbox = (imageUrl) => {
     setSelectedImage(imageUrl);
-    document.body.style.overflow = 'hidden'; // Запретить скролл страницы
+    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
-    document.body.style.overflow = ''; // Разрешить скролл страницы
+    document.body.style.overflow = '';
   };
 
   return (

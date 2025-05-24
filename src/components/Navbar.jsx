@@ -1,47 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import '../static/css/components/Navbar.css';
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
+function Navbar() {
+  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Закрывать меню при ресайзе свыше 480px
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 480) {
-        setOpen(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Функция для закрытия меню при клике на ссылку
-  const handleLinkClick = () => {
-    setOpen(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <nav className="navbar">
-      <h1 className="logo">Alpamis Travel</h1>
-      <button className="menu-toggle" onClick={() => setOpen(o => !o)}>
+      <div className="logo">Alpamis Travel</div> {/* <-- ИЗМЕНЕНО */}
+      <button className="menu-toggle" onClick={toggleMenu}>
         ☰
       </button>
-      <div className={`nav-links${open ? ' open' : ''}`}>
-        <NavLink
+      <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+        <Link
           to="/"
-          className={({ isActive }) => isActive ? 'active' : ''}
-          onClick={handleLinkClick}
+          className={location.pathname === '/' ? 'active' : ''}
+          onClick={() => setIsMenuOpen(false)}
         >
           Главная
-        </NavLink>
-        <NavLink
+        </Link>
+        <Link
           to="/places"
-          className={({ isActive }) => isActive ? 'active' : ''}
-          onClick={handleLinkClick}
+          className={location.pathname === '/places' ? 'active' : ''}
+          onClick={() => setIsMenuOpen(false)}
         >
           Места
-        </NavLink>
+        </Link>
+        <Link
+          to="/contacts"
+          className={location.pathname === '/contacts' ? 'active' : ''}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Контакты
+        </Link>
       </div>
     </nav>
   );
 }
+
+export default Navbar;

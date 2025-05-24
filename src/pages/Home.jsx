@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import '../static/css/pages/Home.css';
 
 // Импорты изображений
 import heroImg from '../images/nation.jpg';
@@ -12,7 +13,6 @@ import cuisineImg from '../images/cuisine.jpg';
 import videoCulture from '../images/culture_video.mp4';
 
 export default function Home() {
-  // Эффект для плавного появления элементов при скролле
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -20,22 +20,16 @@ export default function Home() {
           if (entry.isIntersecting) {
             entry.target.classList.add('appear');
           }
-          // Опционально: можно убрать класс 'appear', чтобы элементы исчезали при прокрутке вверх
-          // else {
-          //   entry.target.classList.remove('appear');
-          // }
         });
       },
       {
-        threshold: 0.15, // Элемент будет появляться, когда 15% его видимой части будет на экране
+        threshold: 0.15,
       }
     );
 
-    // Применяем observer ко всем элементам с классом 'fade-in'
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach((el) => observer.observe(el));
 
-    // Очистка observer при размонтировании компонента
     return () => {
       fadeElements.forEach((el) => observer.unobserve(el));
     };
@@ -43,14 +37,13 @@ export default function Home() {
 
   return (
     <div className="home-container">
-
-      {/* HERO */}
+      {/* HERO SECTION */}
       <section className="hero">
-        <h2>Добро пожаловать в Каракалпакстан</h2>
+        <h2>Добро пожаловать в Каракалпакстан с Alpamis Travel!</h2> {/* <-- ОБНОВЛЕНО */}
         <p>
           Каракалпаки — древний народ с богатой историей, уникальными традициями и самобытной культурой.
           Приглашаем вас открыть для себя удивительные уголки их родины!
-        </p>
+        </p> {/* <-- ВОССТАНОВЛЕНО */}
         <img src={heroImg} alt="Народ каракалпаков" />
       </section>
 
@@ -134,18 +127,16 @@ export default function Home() {
           slidesPerView={1}
           loop={true}
           autoplay={{
-            delay: 4000, // Автоматическое переключение каждые 4 секунды
-            disableOnInteraction: false, // Не останавливать при взаимодействии пользователя
+            delay: 4000,
+            disableOnInteraction: false,
           }}
-          pagination={{ clickable: true }} // Точки для навигации
-          navigation={true} // Стрелки навигации
+          pagination={{ clickable: true }}
+          navigation={true}
           breakpoints={{
-            // Когда ширина окна >= 768px
             768: {
               slidesPerView: 2,
               spaceBetween: 20,
             },
-            // Когда ширина окна >= 1024px
             1024: {
               slidesPerView: 3,
               spaceBetween: 30,
