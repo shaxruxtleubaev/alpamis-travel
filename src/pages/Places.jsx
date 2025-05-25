@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PlaceCard from '../components/PlaceCard';
-import '../static/css/pages/Places.css'; // <-- ОБНОВЛЕННЫЙ ПУТЬ
+import '../static/css/pages/Places.css';
 
 import pic1 from '../images/pic1.png';
 import pic2 from '../images/pic2.png';
@@ -55,7 +55,10 @@ export default function Places() {
                   m.type === 'video' ? (
                     <video key={i} controls src={m.url} />
                   ) : (
-                    <img key={i} src={m.url} alt={p.title} onClick={() => openLightbox(m.url)} />
+                    <div key={i} className="image-container">
+                      <img src={m.url} alt={p.title} className="viewable" onClick={() => openLightbox(m.url)} />
+                      <div className="view-icon">+</div>
+                    </div>
                   )
                 )}
               </div>

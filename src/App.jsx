@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Places from './pages/Places';
-import Contacts from './pages/Contacts'; // <-- НОВЫЙ ИМПОРТ
+import Contacts from './pages/Contacts';
+import Zoroastrianism from './pages/Zoroastrianism'; // <-- НОВЫЙ ИМПОРТ
 
 // Импорты глобальных стилей и утилит
 import './static/css/global.css';
@@ -46,7 +47,8 @@ function App() {
         <Routes>
           <Route path="/"       element={<Home />} />
           <Route path="/places" element={<Places />} />
-          <Route path="/contacts" element={<Contacts />} /> {/* <-- НОВЫЙ ROUTE */}
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/zoroastrianism" element={<Zoroastrianism />} /> {/* <-- НОВЫЙ ROUTE */}
         </Routes>
       </div>
     </Router>

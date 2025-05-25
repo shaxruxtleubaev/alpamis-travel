@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">Alpamis Travel</div> {/* <-- ИЗМЕНЕНО */}
+      <div className="logo">Alpamis Travel</div>
       <button className="menu-toggle" onClick={toggleMenu}>
         ☰
       </button>
@@ -30,6 +30,13 @@ function Navbar() {
           onClick={() => setIsMenuOpen(false)}
         >
           Места
+        </Link>
+        <Link
+          to="/zoroastrianism" // <-- НОВАЯ ССЫЛКА
+          className={location.pathname === '/zoroastrianism' ? 'active' : ''}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Зороастризм
         </Link>
         <Link
           to="/contacts"
