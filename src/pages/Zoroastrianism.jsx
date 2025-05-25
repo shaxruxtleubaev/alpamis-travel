@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import '../static/css/pages/Zoroastrianism.css';
 
-// ИМПОРТЫ ИЗОБРАЖЕНИЙ
+// ИМПОРТЫ ИЗОБРАЖЕНИЙ (ПРЕДПОЛАГАЕТСЯ, ЧТО ВЫ СКАЧАЛИ И НАЗВАЛИ ИХ ТАК)
+// Общие изображения
 import zoroHero from '../images/zoroastrianism/zoro_hero_landscape.jpg';
 import zoroHistory from '../images/zoroastrianism/zoro_history_ancient.jpg';
+
+// Изображения для памятников
 import chilpyk1 from '../images/zoroastrianism/chilpyk_1.jpg';
-import chilpyk2 from '../images/zoroastrianism/chilpyk_2.jpg';
+import chilpyk2 from '../images/zoroastrianism/chilpyk_2.jpg'; // Если есть второе фото Чыльпыка
 import toprakKalaRecon from '../images/zoroastrianism/toprak_kala_reconstruction.jpg';
 import toprakKalaRuins from '../images/zoroastrianism/toprak_kala_ruins.jpg';
 import mizdakhkanOverview from '../images/zoroastrianism/mizdakhkan_overview.jpg';
-import mizdakhkanDetail from '../images/zoroastrianism/mizdakhkan_detail.jpg';
+import mizdakhkanDetail from '../images/zoroastrianism/mizdakhkan_detail.jpg'; // Если есть второе фото Миздахкана
 import kazaklyYatkanRuins from '../images/zoroastrianism/kazakly_yatkan_ruins.jpg';
-import kazaklyYatkanTemple from '../images/zoroastrianism/kazakly_yatkan_temple.jpg';
+import kazaklyYatkanTemple from '../images/zoroastrianism/kazakly_yatkan_temple.jpg'; // Если есть второе фото Казаклы-Яткана
 
 export default function Zoroastrianism() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -22,11 +25,13 @@ export default function Zoroastrianism() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('appear');
+            // Если вы хотите, чтобы элемент появлялся только один раз, раскомментируйте следующую строку:
+            // observer.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.15,
+        threshold: 0.01, // <--- ИЗМЕНЕНО ДЛЯ ЛУЧШЕЙ РАБОТЫ НА VERCEL
       }
     );
 
@@ -141,7 +146,7 @@ export default function Zoroastrianism() {
         <div className="monument-card fade-in">
           <h3>Казаклы-Яткан (Акшахан-Кала): Город огня и царей</h3>
           <p>
-            Городище **Казаклы-Яткан**, также известное как Акшахан-Кала, было открыто в 1956 году и с 1995 года активно исследуется международной археологической экспедицией. Расположенное на территории Берунийского района Республики Каракалпакстан, оно состоит из двух частей: Верхнего города и Нижнего города, входящих в общую оборонительную систему. Основные полевые работы сосредоточены в "Верхнем городе", который впоследствии был назван "священным городом".
+            Городище **Казаклы-Яткан**, также известное как Акшахан-Кала, было открыто в 1956 году и с 1995 года активно исследуется международной археологической экспедицией. Расположенное на территории Берунийского района Республики Каракалпакстан, оно состоит из двух частей: Верхнего города и Нижнего города, которые входили в общую оборонительную систему. Основные полевые работы сосредоточены в "Верхнем городе", который впоследствии был назван "священным городом".
           </p>
           <p>
             Центральным объектом является **храм** – массивное монументальное здание почти квадратной формы (приблизительно 60х60 м) с круглыми башнями по углам и воротами, фланкированными полукруглыми башнями, расположенными посредине каждой из четырех внешних стен. Внутри храмовой площади отмечены следы сильной прокалённости, и здесь обнаружена прямоугольная сильно обожженная площадка, условно определенная как **"алтарь огня"**. Кроме того, в северной половине храма располагалась своеобразная **портретная галерея царей**, что указывает на тесную связь между зороастрийским культом и царской властью в древнем Хорезме.

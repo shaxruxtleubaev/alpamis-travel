@@ -140,8 +140,6 @@
   justify-items: center;
 }
 
-/* ЗАМЕНЕНО: .image-gallery img { ... } */
-/* Теперь .image-container управляет изображением внутри галереи */
 .image-gallery .image-container {
   width: 100%; /* Убедимся, что контейнер занимает всю доступную ширину в гриде */
 }
