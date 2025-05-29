@@ -7,8 +7,8 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 100; /* Чтобы навбар был поверх других элементов */
-    position: relative;
+    z-index: 1000; /* Увеличил z-index для navbar */
+    position: relative; /* Важно для позиционирования мобильного меню */
 }
 
 .navbar-brand a {
@@ -62,7 +62,7 @@
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 101; /* Поверх меню */
+    z-index: 1001; /* Убедимся, что кнопка поверх всего, даже меню */
     flex-direction: column;
     justify-content: space-around;
     width: 30px;
@@ -92,15 +92,16 @@
         width: 100%;
         background-color: var(--color-dark-blue, #222);
         padding: 1rem 0;
-        display: none; /* Скрыто по умолчанию */
+        display: none !important; /* Скрыто по умолчанию, используем !important для переопределения */
         box-shadow: 0 5px 10px rgba(0,0,0,0.3);
         transform: translateY(-100%); /* Начальное положение для анимации */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         opacity: 0;
+        z-index: 999; /* Чуть ниже кнопки, но выше основного контента */
     }
 
     .navbar-nav.open {
-        display: flex; /* Показать, когда меню открыто */
+        display: flex !important; /* Показать, когда меню открыто */
         transform: translateY(0); /* Сдвинуть на место */
         opacity: 1;
     }

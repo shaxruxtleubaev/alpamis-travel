@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../static/css/pages/Routes.css';
+// import ImageWithSpinner from '../components/ImageWithSpinner'; // УДАЛЯЕМ ЭТУ СТРОКУ
 
 // ИМПОРТЫ ИЗОБРАЖЕНИЙ МАРШРУТОВ (ПРОВЕРЬТЕ И ЗАМЕНИТЕ НА ВАШИ АКТУАЛЬНЫЕ ПУТИ И ИМЕНА ФАЙЛОВ!)
-// Если вы используете другие форматы (.png, .webp) или названия, измените соответственно.
 import nukusImage from '../images/routes/nukus_city.jpg';
 import ichanKalaKhalkabadImage from '../images/routes/ichan_kala_khalkabad.jpg';
 import yurtCraftsmenHouseImage from '../images/routes/yurt_craftsmen_house.jpg';
@@ -130,7 +130,6 @@ export default function Routes() {
       });
     }, observerOptions);
 
-    // Удаляем .arrow-down-css из наблюдаемых элементов
     const animatedElements = document.querySelectorAll('.route-info-block, .route-stop');
     animatedElements.forEach((el) => observer.observe(el));
 
@@ -138,6 +137,7 @@ export default function Routes() {
       animatedElements.forEach((el) => observer.unobserve(el));
     };
   }, []);
+
 
   const openLightbox = (imageUrl) => {
     setSelectedImage(imageUrl);
@@ -153,7 +153,6 @@ export default function Routes() {
     <div className="routes-container">
       {routesData.map((route, routeIndex) => (
         <section key={route.id} className={`route-section`}>
-          {/* Новый блок для заголовка и описания маршрута */}
           <div className="route-info-block fade-in">
             <h2 className="route-section-heading">{route.name}</h2>
             <p className="route-tagline">{route.tagline}</p>
@@ -163,16 +162,16 @@ export default function Routes() {
             {route.stops.map((stop, stopIndex) => (
               <React.Fragment key={stop.name}>
                 <div className="route-stop fade-in">
-                  <div className="image-container">
-                    <img src={stop.image} alt={stop.name} className="viewable" onClick={() => openLightbox(stop.image)} />
-                    <div className="view-icon">+</div>
+                  {/* ВОЗВРАЩЕНО К ОБЫЧНОМУ IMG ТЕГУ */}
+                  <div className="image-container viewable" onClick={() => openLightbox(stop.image)}>
+                    <img src={stop.image} alt={stop.name} />
+                    <div className="view-icon">🔍</div>
                   </div>
                   <div className="text-content">
                     <h3>{stop.name}</h3>
                     <p>{stop.description}</p>
                   </div>
                 </div>
-                {/* Удален условный рендеринг стрелочки */}
               </React.Fragment>
             ))}
           </div>
