@@ -8,7 +8,7 @@
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 100; /* Чтобы навбар был поверх других элементов */
-    position: relative; /* Или fixed, sticky, в зависимости от желаемого поведения */
+    position: relative;
 }
 
 .navbar-brand a {
@@ -53,11 +53,37 @@
 .nav-link.active {
     color: var(--color-orange, #ff8c00); /* Оранжевый для активной ссылки */
     font-weight: bold;
-    /* background-color: var(--color-orange-light, rgba(255,140,0,0.2)); */ /* Можно добавить фон для активной */
 }
 
-/* Мобильные стили (понадобится также логика для меню-гамбургера в Navbar.jsx) */
+/* Стили для кнопки-гамбургера */
+.menu-toggle {
+    display: none; /* Скрыто по умолчанию на больших экранах */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 101; /* Поверх меню */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+}
+
+.hamburger {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-white, #fff);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Мобильные стили */
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Показать кнопку гамбургера */
+    }
+
     .navbar-nav {
         flex-direction: column;
         position: absolute;
@@ -67,11 +93,16 @@
         background-color: var(--color-dark-blue, #222);
         padding: 1rem 0;
         display: none; /* Скрыто по умолчанию */
-        /* Чтобы отображать, нужна логика в Navbar.jsx, управляющая классом 'open' */
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        transform: translateY(-100%); /* Начальное положение для анимации */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        opacity: 0;
     }
 
     .navbar-nav.open {
         display: flex; /* Показать, когда меню открыто */
+        transform: translateY(0); /* Сдвинуть на место */
+        opacity: 1;
     }
 
     .nav-link {
@@ -79,6 +110,16 @@
         padding: 0.8rem 1rem;
     }
 
-    /* Добавьте кнопку-гамбургер, если нужна */
-    /* .menu-toggle { display: block; } */
+    /* Анимация гамбургера */
+    .menu-toggle.open .hamburger:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.open .hamburger:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.open .hamburger:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 }
