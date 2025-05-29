@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer'; // Импортируем новый компонент Footer
 import Home from './pages/Home';
 import Places from './pages/Places';
 import Contacts from './pages/Contacts';
 import Zoroastrianism from './pages/Zoroastrianism';
-import OurRoutes from './pages/Routes';
+import OurRoutes from './pages/Routes'; // Убедитесь, что это ваш компонент маршрутов
 
 // Импорты глобальных стилей и утилит
 import './static/css/global.css';
@@ -31,27 +32,52 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Эффект для уменьшения шапки при скролле
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) { // Убедимся, что navbar существует
+        if (window.scrollY > 50) { // Например, уменьшаем после 50px скролла
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Router>
-      <div className="app-container">
-        <div className="background-slider">
-          {backgroundImages.map((image, index) => (
-            <div
-              key={index}
-              className={`background-image ${index === currentBgIndex ? 'active' : ''}`}
-              style={{ backgroundImage: `url(${image})` }}
-            ></div>
-          ))}
-        </div>
+      {/* Background Slider должен быть вне app-container, если он фон всего body,
+          или позиционироваться абсолютно внутри app-container с низким z-index */}
+      <div className="background-slider">
+        {backgroundImages.map((image, index) => (
+          <div
+            key={index}
+            className={`background-image ${index === currentBgIndex ? 'active' : ''}`}
+            style={{ backgroundImage: `url(${image})` }}
+          ></div>
+        ))}
+      </div>
 
+      <div className="app-container"> {/* app-container теперь будет управлять Flexbox */}
         <Navbar />
-        <Routes>
-          <Route path="/"       element={<Home />} />
-          <Route path="/places" element={<Places />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/zoroastrianism" element={<Zoroastrianism />} />
-          <Route path="/routes" element={<OurRoutes />} />
-        </Routes>
+        {/* Main content wrapper для отступа от фиксированного навбара */}
+        <main className="main-content-wrapper">
+          <Routes>
+            <Route path="/"       element={<Home />} />
+            <Route path="/places" element={<Places />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/zoroastrianism" element={<Zoroastrianism />} />
+            <Route path="/routes" element={<OurRoutes />} />
+          </Routes>
+        </main>
+        <Footer /> {/* Футер */}
       </div>
     </Router>
   );

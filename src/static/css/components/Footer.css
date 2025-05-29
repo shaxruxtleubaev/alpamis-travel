@@ -1,0 +1,115 @@
+/* src/static/css/components/Footer.css */
+
+.footer {
+    background-color: var(--color-dark-blue, #222); /* Темный фон, как у навигации */
+    color: var(--color-light-gray, #ccc); /* Светлый текст */
+    padding: 3rem 2rem;
+    font-family: Arial, sans-serif;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    position: relative; /* Важно: чтобы быть над фоном */
+    z-index: 2; /* Убедимся, что футер над фоновым слайдером */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem; /* Отступы между секциями футера */
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px; /* Минимальная ширина для секции */
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h3 {
+    color: var(--color-orange, #ff8c00); /* Оранжевый цвет для заголовков */
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-orange, #ff8c00);
+    padding-bottom: 0.5rem;
+    display: inline-block; /* Чтобы рамка была по размеру текста */
+}
+
+.footer-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-section ul li a {
+    color: var(--color-light-gray, #ccc);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-white, #fff);
+}
+
+.footer-section.contact p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-section.contact p i {
+    color: var(--color-orange, #ff8c00);
+    font-size: 1.2rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+    color: var(--color-gray, #999);
+}
+
+/* Адаптивные стили для футера */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        min-width: unset;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        margin: 0 auto 1rem auto;
+        display: table; /* Центрируем рамку */
+    }
+
+    .footer-section.contact p {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 2rem 1rem;
+    }
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+}

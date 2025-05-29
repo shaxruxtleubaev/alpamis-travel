@@ -10,6 +10,15 @@
   --color-orange:      #FF7F11;
   --color-red:         #EF233C;
 
+  /* Добавляем недостающие переменные для Navbar и Footer,
+     убедитесь, что они соответствуют вашему дизайн-коду */
+  --color-dark-blue: #2c3e50; /* Используется в Navbar и Footer */
+  --color-white: #ffffff; /* Используется в Navbar */
+  --color-light-gray: #ccc; /* Используется в Navbar и Footer */
+  --color-gray-hover: rgba(255,255,255,0.1); /* Используется в Navbar */
+  --color-gray: #999; /* Используется в Footer */
+
+
   --font-base:    'Comfortaa', sans-serif;
   --font-heading: 'Roboto Slab', serif;
 }
@@ -18,30 +27,34 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: var(--font-base);
-  color: #333;
-  overflow-x: hidden;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; /* Убедимся, что html и body занимают всю высоту */
+    overflow-x: hidden; /* Предотвращает горизонтальный скролл */
+    font-family: var(--font-base);
+    color: #333;
 }
 
 /* Контейнер для всего приложения, чтобы фон был под ним */
 .app-container {
   position: relative;
   min-height: 100vh;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
+  z-index: 1; /* Чтобы app-container был выше слайдера */
+  display: flex; /* Делаем flex-контейнером */
+  flex-direction: column; /* Элементы располагаются по вертикали */
+  background-color: transparent; /* Убедимся, что контейнер не перекрывает фон */
 }
 
 /* СТИЛИ ДЛЯ ФОНОВОГО СЛАЙДЕРА */
 .background-slider {
-  position: fixed;
+  position: fixed; /* Фиксированное позиционирование, чтобы он был фоном всего экрана */
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: 0; /* ОЧЕНЬ ВАЖНО: Слайдер находится ПОД всем контентом */
   overflow: hidden;
 }
 
@@ -56,6 +69,7 @@ body {
   opacity: 0;
   transition: opacity 1.5s ease-in-out, transform 10s linear;
   transform: scale(1);
+  filter: brightness(60%); /* Применяем затемнение здесь для лучшей читаемости контента */
 }
 
 .background-image.active {
@@ -63,15 +77,31 @@ body {
   transform: scale(1.1);
 }
 
-/* Чтобы контент был над фоном */
-.navbar, .home-container, .places-container { /* <-- ИЗМЕНЕНО */
+/* Общий контейнер для основного контента, чтобы создать отступ от фиксированного навбара */
+.main-content-wrapper {
+    flex: 1; /* Позволяет основному контенту занимать все доступное пространство между Navbar и Footer */
+    padding-top: 80px; /* Отступ от фиксированного навбара (примерно 70px + небольшой запас) */
+    position: relative; /* Для правильного z-index */
+    z-index: 2; /* Чтобы быть выше фонового слайдера, но под навбаром */
+}
+
+
+/* Чтобы контент был над фоном (удаляем .navbar отсюда, т.к. Navbar.css управляет его z-index) */
+.home-container,
+.places-container,
+.contacts-container, /* Добавляем ваши страницы для z-index */
+.zoroastrianism-container, /* Добавляем ваши страницы для z-index */
+.routes-container { /* Это ваш OurRoutes компонент, если он использует такой класс */
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Убедимся, что они поверх слайдера */
 }
 
 /* Центрируем контент */
 .home-container,
-.places-container { /* <-- ИЗМЕНЕНО */
+.places-container,
+.contacts-container,
+.zoroastrianism-container,
+.routes-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;

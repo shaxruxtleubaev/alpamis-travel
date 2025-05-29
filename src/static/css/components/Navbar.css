@@ -7,20 +7,34 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1000; /* Увеличил z-index для navbar */
-    position: relative; /* Важно для позиционирования мобильного меню */
+    z-index: 1000; /* ВЫСОКИЙ Z-INDEX ДЛЯ ФИКСИРОВАННОЙ ШАПКИ */
+    position: fixed; /* ФИКСИРОВАННЫЙ */
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: padding 0.3s ease, font-size 0.3s ease; /* Анимация для уменьшения */
 }
+
+/* Стили для уменьшенной шапки */
+.navbar.scrolled {
+    padding: 0.7rem 2rem; /* Уменьшаем padding */
+}
+
 
 .navbar-brand a {
     color: var(--color-white, #fff); /* Белый текст для бренда */
     font-size: 1.8rem;
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, font-size 0.3s ease; /* Добавлена анимация для шрифта */
 }
 
 .navbar-brand a:hover {
     color: var(--color-orange, #ff8c00); /* Оранжевый при наведении */
+}
+
+.navbar.scrolled .navbar-brand a {
+    font-size: 1.6rem; /* Уменьшаем шрифт брендинга при скролле */
 }
 
 .navbar-nav {
@@ -41,7 +55,7 @@
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, font-size 0.3s ease; /* Добавлена анимация для шрифта */
     display: block; /* Чтобы padding работал как на кнопке */
 }
 
@@ -62,11 +76,12 @@
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 1001; /* Убедимся, что кнопка поверх всего, даже меню */
+    z-index: 1001; /* Повышен z-index, чтобы быть поверх мобильного меню и основного навбара */
     flex-direction: column;
     justify-content: space-around;
     width: 30px;
     height: 25px;
+    position: relative; /* Чтобы z-index работал корректно на мобильных */
 }
 
 .hamburger {
@@ -110,6 +125,11 @@
         text-align: center;
         padding: 0.8rem 1rem;
     }
+    
+    .navbar.scrolled .nav-link {
+        font-size: 1rem; /* Уменьшаем шрифт ссылок при скролле на мобильных */
+    }
+
 
     /* Анимация гамбургера */
     .menu-toggle.open .hamburger:nth-child(1) {
