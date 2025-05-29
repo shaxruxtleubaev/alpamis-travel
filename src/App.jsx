@@ -4,7 +4,8 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Places from './pages/Places';
 import Contacts from './pages/Contacts';
-import Zoroastrianism from './pages/Zoroastrianism'; // <-- НОВЫЙ ИМПОРТ
+import Zoroastrianism from './pages/Zoroastrianism';
+import OurRoutes from './pages/Routes';
 
 // Импорты глобальных стилей и утилит
 import './static/css/global.css';
@@ -48,7 +49,8 @@ function App() {
           <Route path="/"       element={<Home />} />
           <Route path="/places" element={<Places />} />
           <Route path="/contacts" element={<Contacts />} />
-          <Route path="/zoroastrianism" element={<Zoroastrianism />} /> {/* <-- НОВЫЙ ROUTE */}
+          <Route path="/zoroastrianism" element={<Zoroastrianism />} />
+          <Route path="/routes" element={<OurRoutes />} />
         </Routes>
       </div>
     </Router>

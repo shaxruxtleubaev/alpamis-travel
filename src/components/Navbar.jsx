@@ -1,51 +1,40 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import '../static/css/components/Navbar.css';
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import '../static/css/components/Navbar.css'; // <-- Убедитесь, что этот путь верен!
 
 function Navbar() {
-  const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
     <nav className="navbar">
-      <div className="logo">Alpamis Travel</div>
-      <button className="menu-toggle" onClick={toggleMenu}>
-        ☰
-      </button>
-      <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-        <Link
-          to="/"
-          className={location.pathname === '/' ? 'active' : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Главная
-        </Link>
-        <Link
-          to="/places"
-          className={location.pathname === '/places' ? 'active' : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Места
-        </Link>
-        <Link
-          to="/zoroastrianism" // <-- НОВАЯ ССЫЛКА
-          className={location.pathname === '/zoroastrianism' ? 'active' : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Зороастризм
-        </Link>
-        <Link
-          to="/contacts"
-          className={location.pathname === '/contacts' ? 'active' : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Контакты
-        </Link>
+      <div className="navbar-brand">
+        <Link to="/">Alpamis Travel</Link> {/* Ваш логотип или название компании */}
       </div>
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Главная
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/places" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Места
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/zoroastrianism" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Зороастризм
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/routes" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Наши Маршруты
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/contacts" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Контакты
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }

@@ -1,0 +1,454 @@
+/* Общие стили для контейнера страницы маршрутов */
+.routes-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fdfdfd; /* Чистый фон для контента */
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.routes-container h1,
+.routes-container h2,
+.routes-container h3 {
+    font-family: var(--font-heading, 'Georgia', serif);
+    color: var(--color-red, #a10000);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.routes-container h1 {
+    font-size: 3.2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    color: var(--color-dark-blue, #222);
+}
+
+.routes-container h2 {
+    font-size: 2.8rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+    color: var(--color-red, #a10000); /* Цвет заголовков маршрутов */
+}
+
+.routes-container h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 100px;
+    height: 5px;
+    background-color: var(--color-orange, #ff8c00);
+    border-radius: 2.5px;
+}
+
+.routes-container h3 {
+    font-size: 1.9rem;
+    color: var(--color-orange, #ff8c00);
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.routes-container p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    text-align: justify;
+    color: #444;
+}
+
+/* Стили для секций маршрутов */
+.route-section {
+    margin-bottom: 5rem;
+    padding: 2.5rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* НОВЫЙ БЛОК: Для заголовка и описания маршрута */
+.route-info-block {
+    text-align: center;
+    margin-bottom: 3.5rem; /* Отступ между блоком инфо и первым элементом маршрута */
+    padding: 2rem 3rem; /* Увеличил padding */
+    background-color: rgba(255, 255, 255, 0.95); /* Более плотный фон */
+    border-radius: 15px; /* Более скругленные углы */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Выраженная тень */
+    transform: translateY(50px); /* Для анимации появления */
+    opacity: 0; /* Изначально скрыто */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.route-info-block .route-section-heading {
+    margin-top: 0; /* Убираем лишний отступ */
+    margin-bottom: 0.8rem; /* Уменьшаем отступ между заголовком и подзаголовком */
+    display: block; /* Сброс inline-block */
+    color: var(--color-red, #a10000);
+}
+
+.route-info-block .route-section-heading::after {
+    display: none; /* Убираем подчеркивание у заголовка внутри этого блока */
+}
+
+.route-info-block .route-tagline {
+    margin-bottom: 0; /* Убираем лишний отступ */
+    font-style: normal; /* Сброс курсива */
+    color: #555;
+    background: none; /* Убираем фоновый цвет, он уже есть у родителя */
+    box-shadow: none; /* Убираем тень, она уже есть у родителя */
+    padding: 0; /* Убираем лишний padding */
+}
+
+
+/* Контейнер для "дорожной карты" */
+.route-path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 1.5rem 0;
+    /* Удалены стили ::before, если линия маршрута больше не нужна */
+}
+
+/* Отдельная остановка маршрута */
+.route-stop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    max-width: 950px;
+    /* Уменьшены отступы для приближения локаций */
+    margin: 1.5rem auto; /* Было 3rem auto */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 2.5rem;
+    gap: 2.5rem;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Чередование сторон для эффекта маршрута */
+.route-stop:nth-child(odd) {
+    flex-direction: row;
+    margin-right: auto;
+}
+
+.route-stop:nth-child(even) {
+    flex-direction: row-reverse;
+    margin-left: auto;
+}
+
+.route-stop .image-container {
+    flex-shrink: 0;
+    width: 350px;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.route-stop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.route-stop img:hover {
+    transform: scale(1.05);
+}
+
+.route-stop .text-content {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.route-stop h3 {
+    margin-bottom: 1rem;
+    color: var(--color-red, #a10000);
+    text-align: left;
+}
+
+.route-stop p {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: left;
+}
+
+/* Удалены все стили для .arrow-down-css */
+
+/* Анимации общие */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Общие стили для иконок просмотра */
+.image-container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.viewable {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.viewable:hover {
+  transform: scale(1.05);
+}
+
+.view-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.image-container:hover .view-icon {
+  opacity: 1;
+}
+
+/* Стили для Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 95%;
+  max-height: 95%;
+  overflow: hidden;
+  cursor: default;
+  animation: slideIn 0.3s ease-out;
+}
+
+.lightbox-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  border: none;
+  background: none;
+  padding: 0;
+  text-shadow: 0px 0px 8px rgba(0,0,0,0.8);
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Адаптивные стили (улучшенные) */
+@media (max-width: 1200px) {
+    .routes-container {
+        padding: 1.5rem;
+    }
+    .route-stop {
+        width: 95%;
+        padding: 2rem;
+        gap: 2rem;
+        margin: 1.2rem auto; /* Скорректировано */
+    }
+    .route-stop .image-container {
+        width: 300px;
+        height: 220px;
+    }
+    .routes-container p {
+        font-size: 1.15rem;
+    }
+    .route-info-block {
+        padding: 1.5rem 2rem;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .routes-container h1 {
+        font-size: 2.5rem;
+    }
+    .routes-container h2 {
+        font-size: 2.2rem;
+    }
+    .route-info-block .route-section-heading {
+        font-size: 2rem;
+    }
+    .route-info-block .route-tagline {
+        font-size: 1.2rem;
+    }
+    .route-stop {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        margin: 1rem auto; /* Скорректировано */
+    }
+    .route-stop:nth-child(odd),
+    .route-stop:nth-child(even) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .route-stop .image-container {
+        width: 90%;
+        max-width: 350px;
+        height: 250px;
+        margin-bottom: 1rem;
+    }
+    .route-stop .text-content {
+        text-align: center;
+    }
+    .route-stop h3, .route-stop p {
+        text-align: center;
+    }
+    /* Удалены медиа-стили для стрелочки */
+}
+
+@media (max-width: 768px) {
+    .routes-container {
+        padding: 1rem;
+    }
+    .routes-container h1 {
+        font-size: 2rem;
+    }
+    .routes-container h2 {
+        font-size: 1.8rem;
+    }
+    .routes-container h3 {
+        font-size: 1.5rem;
+    }
+    .routes-container p {
+        font-size: 1.05rem;
+    }
+    .route-section {
+        padding: 1.5rem;
+    }
+    .route-info-block {
+        padding: 1rem 1.5rem;
+    }
+    .route-info-block .route-section-heading {
+        font-size: 1.7rem;
+    }
+    .route-info-block .route-tagline {
+        font-size: 1.05rem;
+    }
+    .route-stop {
+        padding: 1rem;
+        gap: 1rem;
+        margin: 0.8rem auto; /* Скорректировано */
+    }
+    .route-stop .image-container {
+        width: 95%;
+        height: 180px;
+    }
+    /* Удалены медиа-стили для стрелочки */
+    .view-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    .lightbox-close {
+        font-size: 3rem;
+        top: 10px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .routes-container {
+        padding: 0.5rem;
+    }
+    .routes-container h1 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+    .routes-container h2 {
+        font-size: 1.5rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .route-info-block {
+        padding: 0.8rem 1rem;
+    }
+    .route-info-block .route-section-heading {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    .route-info-block .route-tagline {
+        font-size: 0.95rem;
+    }
+    .routes-container h3 {
+        font-size: 1.3rem;
+    }
+    .routes-container p {
+        font-size: 0.95rem;
+    }
+    .route-section {
+        padding: 1rem;
+        margin-bottom: 3rem;
+    }
+    .route-stop {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0.8rem;
+        gap: 0.8rem;
+        margin: 0.5rem auto; /* Скорректировано */
+    }
+    .route-stop .image-container {
+        width: 100%;
+        height: 150px;
+    }
+    /* Удалены медиа-стили для стрелочки */
+}
