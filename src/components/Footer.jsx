@@ -19,7 +19,7 @@ export default function Footer() {
           <h3>Быстрые ссылки</h3>
           <ul>
             <li><a href="/">Главная</a></li>
-            <li><a href="/about">О нас</a></li> {/* Убедитесь, что у вас есть /about */}
+
             <li><a href="/routes">Наши туры</a></li>
             <li><a href="/contacts">Контакты</a></li>
           </ul>
