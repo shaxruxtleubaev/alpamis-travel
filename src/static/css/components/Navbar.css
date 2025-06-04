@@ -5,7 +5,7 @@
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Центрируем элементы по вертикали внутри навбара */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 1000; /* ВЫСОКИЙ Z-INDEX ДЛЯ ФИКСИРОВАННОЙ ШАПКИ */
     position: fixed; /* ФИКСИРОВАННЫЙ */
@@ -96,13 +96,13 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 10px; /* Увеличиваем padding для лучшей области касания */
+    /* padding: 10px; -- УДАЛЕНО: контролируем размер через width/height */
     z-index: 1001; /* Повышен z-index, чтобы быть поверх мобильного меню */
-    width: 40px; /* Фиксированная ширина для кнопки */
-    height: 40px; /* Фиксированная высота для кнопки */
-    display: flex; /* Для центрирования изображения */
-    justify-content: center;
-    align-items: center;
+    width: 60px; /* УВЕЛИЧЕНО: Фиксированная ширина для кнопки */
+    height: 60px; /* УВЕЛИЧЕНО: Фиксированная высота для кнопки (для лучшего выравнивания с уменьшенным лого) */
+    display: flex; /* Делаем флекс-контейнером для центрирования */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
     -webkit-tap-highlight-color: transparent; /* Убираем синюю подсветку при тапе на iOS */
 }
 
@@ -112,6 +112,7 @@
     height: 100%; /* Изображение занимает всю высоту контейнера кнопки */
     object-fit: contain; /* Сохраняем пропорции изображения, вписывая его в контейнер */
     filter: invert(100%); /* Делаем иконку белой, если она черная, чтобы контрастировать с фоном */
+    /* vertical-align: middle; -- УДАЛЕНО: Flexbox уже центрирует */
 }
 
 /* Мобильные стили */
